@@ -1,0 +1,53 @@
+<p>Hello from {{hotelName}}</p>
+<div [hidden]="toggleMark">
+  <p>Number of rooms: </p>
+  <div
+    [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green': 'red'}"
+    [innerText]="roomCount"
+  ></div>
+</div>
+
+<button (click)="toggle()">Toggle</button>
+
+
+<h1>   ---  Starting directives right here  ---   </h1>
+
+{{rooms?.availableRooms?? "No rooms"}}
+
+<div *ngIf="rooms.availableRooms > 0">
+  Room List comes here.
+</div>
+
+
+<table class="table">
+  <tr>
+    <th>Viewing number</th>
+    <th>Room number</th>
+    <th>Room Type</th>
+    <th>Room Price</th>
+    <th>Amenities</th>
+    <th>Photo</th>
+    <th>Rating</th>
+    <th>Check in time</th>
+    <th>Check out time</th>
+  </tr>
+  <tr
+    *ngFor="let room of roomDetails | slice: 0:2 ; let e = even; let o = odd; let i = index"
+    [ngClass]="e? 'even' : 'odd'"
+  >
+    <td>{{i}}</td>
+    <td>{{room.roomNumber}}</td>
+    <td>{{room.roomType | uppercase}}</td>
+    <td>{{room.price | currency: 'SLR' }}</td>
+    <td>{{room.amenities | lowercase}}</td>
+    <td>{{room.photo}}</td>
+    <td>{{room.rating | number: '1.1-1'}}</td>
+    <td>{{room.checkInTime | date: 'short'}}</td>
+    <td>{{room.checkOutTime}}</td>
+
+  </tr>
+</table>
+
+<!--{{roomDetails | json}}-->
+<!--Commented cause it makes all the thing look ugly but mind that it works as expected-->
+
