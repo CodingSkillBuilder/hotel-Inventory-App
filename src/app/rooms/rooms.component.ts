@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Room, RoomDetails} from "./rooms";
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.scss']
+  styleUrls: ['./rooms.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsComponent implements OnInit {
 
@@ -60,6 +61,26 @@ export class RoomsComponent implements OnInit {
         checkOutTime: new Date('2023-07-07T12:00:00')
       }
     ];
+  }
+  selectedRoom!: RoomDetails;
+  selectRoom(room: RoomDetails){
+    this.selectedRoom = room;
+  }
+
+  addRoom(){
+    const room: RoomDetails = {
+      roomNumber: 101,
+      roomType: 'Deluxe Suite',
+      amenities: 'WiFi, Air Conditioning, Mini Bar, Ocean View, Flat Screen TV',
+      price: 18500,
+      photo: 'https://picsum.photos/id/1018/600/400', // Random image
+      rating: 4.6,
+      checkInTime: new Date('2025-05-20T14:00:00'),
+      checkOutTime: new Date('2025-05-23T11:00:00'),
+    };
+
+    // this.roomDetails.push(room);
+    this.roomDetails = [...this.roomDetails, room];
   }
 
 }

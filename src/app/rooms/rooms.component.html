@@ -18,36 +18,12 @@
   Room List comes here.
 </div>
 
-
-<table class="table">
-  <tr>
-    <th>Viewing number</th>
-    <th>Room number</th>
-    <th>Room Type</th>
-    <th>Room Price</th>
-    <th>Amenities</th>
-    <th>Photo</th>
-    <th>Rating</th>
-    <th>Check in time</th>
-    <th>Check out time</th>
-  </tr>
-  <tr
-    *ngFor="let room of roomDetails | slice: 0:2 ; let e = even; let o = odd; let i = index"
-    [ngClass]="e? 'even' : 'odd'"
-  >
-    <td>{{i}}</td>
-    <td>{{room.roomNumber}}</td>
-    <td>{{room.roomType | uppercase}}</td>
-    <td>{{room.price | currency: 'SLR' }}</td>
-    <td>{{room.amenities | lowercase}}</td>
-    <td>{{room.photo}}</td>
-    <td>{{room.rating | number: '1.1-1'}}</td>
-    <td>{{room.checkInTime | date: 'short'}}</td>
-    <td>{{room.checkOutTime}}</td>
-
-  </tr>
-</table>
-
+<button (click)="addRoom()">Add Room</button>
+<app-rooms-list [roomDetails]="roomDetails" (roomSelected)="selectRoom($event)"> </app-rooms-list>
+<div
+  *ngIf="selectedRoom"
+  [innerText]="selectedRoom | json"
+></div>
 <!--{{roomDetails | json}}-->
 <!--Commented cause it makes all the thing look ugly but mind that it works as expected-->
 
