@@ -5,7 +5,7 @@ import {Room, RoomDetails} from "./rooms";
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class RoomsComponent implements OnInit {
 
