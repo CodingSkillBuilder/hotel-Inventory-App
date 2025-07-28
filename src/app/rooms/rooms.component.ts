@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {Room, RoomDetails} from "./rooms";
+import {HeaderComponent} from "../header/header.component";
 
 @Component({
   selector: 'app-rooms',
@@ -7,7 +8,7 @@ import {Room, RoomDetails} from "./rooms";
   styleUrls: ['./rooms.component.scss'],
 
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, AfterViewInit {
 
 
   hotelName: string = "jet-wing";
@@ -18,14 +19,19 @@ export class RoomsComponent implements OnInit {
     availableRooms: 10,
     bookedRooms: 5,
   }
+  title:string = "This is the title";
 
+
+  constructor() { }
+
+
+  @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
 
 
   toggle() {
     this.toggleMark = !this.toggleMark;
+    this.title = "The toggle button was hit";
   }
-
-  constructor() { }
 
   roomDetails: RoomDetails[] = [];
   ngOnInit(): void {
@@ -61,7 +67,15 @@ export class RoomsComponent implements OnInit {
         checkOutTime: new Date('2023-07-07T12:00:00')
       }
     ];
+    console.log(this.headerComponent);
   }
+
+  ngAfterViewInit(): void {
+    console.log(this.headerComponent);
+  }
+
+
+
   selectedRoom!: RoomDetails;
   selectRoom(room: RoomDetails){
     this.selectedRoom = room;
@@ -82,5 +96,7 @@ export class RoomsComponent implements OnInit {
     // this.roomDetails.push(room);
     this.roomDetails = [...this.roomDetails, room];
   }
+
+
 
 }

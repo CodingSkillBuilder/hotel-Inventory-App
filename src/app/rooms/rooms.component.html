@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <p>Hello from {{hotelName}}</p>
 <div [hidden]="toggleMark">
   <p>Number of rooms: </p>
@@ -19,7 +21,7 @@
 </div>
 
 <button (click)="addRoom()">Add Room</button>
-<app-rooms-list [roomDetails]="roomDetails" (roomSelected)="selectRoom($event)"> </app-rooms-list>
+<app-rooms-list [roomDetails]="roomDetails" (roomSelected)="selectRoom($event)" [title]="title"> </app-rooms-list>
 <div
   *ngIf="selectedRoom"
   [innerText]="selectedRoom | json"

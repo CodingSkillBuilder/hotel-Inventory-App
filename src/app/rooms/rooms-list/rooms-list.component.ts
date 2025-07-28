@@ -20,11 +20,17 @@ export class RoomsListComponent implements OnInit, OnChanges {
 
   @Input() roomDetails: RoomDetails[] = [];
 
+  @Input() title!: string;
+  // @Input() title: string = "";
+
   @Output() roomSelected = new EventEmitter<RoomDetails>();
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
+    if (changes['title']) {
+      this.title = changes['title'].currentValue.toUpperCase();
+    }
   }
 
   ngOnInit(): void {
