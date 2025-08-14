@@ -23,6 +23,8 @@ export class RoomsListComponent implements OnInit, OnChanges {
   @Input() title!: string;
   // @Input() title: string = "";
 
+  @Input() thisType: string = "This is a cool room";
+
   @Output() roomSelected = new EventEmitter<RoomDetails>();
   constructor() { }
 

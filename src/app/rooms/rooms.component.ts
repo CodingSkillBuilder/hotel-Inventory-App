@@ -24,7 +24,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-
+  // @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
 
 
@@ -35,6 +35,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   roomDetails: RoomDetails[] = [];
   ngOnInit(): void {
+    console.log(this.headerComponent);
     this.roomDetails = [
       {
         roomNumber: 100,
@@ -67,7 +68,6 @@ export class RoomsComponent implements OnInit, AfterViewInit {
         checkOutTime: new Date('2023-07-07T12:00:00')
       }
     ];
-    console.log(this.headerComponent);
   }
 
   ngAfterViewInit(): void {
@@ -79,6 +79,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   selectedRoom!: RoomDetails;
   selectRoom(room: RoomDetails){
     this.selectedRoom = room;
+    // console.log(room);
   }
 
   addRoom(){
