@@ -1,6 +1,15 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {Room, RoomDetails} from "./rooms";
 import {HeaderComponent} from "../header/header.component";
+import {RoomsService} from "./services/rooms.service";
 
 @Component({
   selector: 'app-rooms',
@@ -22,11 +31,15 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   title:string = "This is the title";
 
 
-  constructor() { }
+  constructor(
+    private roomsService: RoomsService
+  ) { }
 
-  // @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
-  @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+  // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
 
+  @ViewChildren(HeaderComponent) headerComponents!: QueryList<HeaderComponent>;
+  //Mind that we can't apply the {static: true} property from here.
 
   toggle() {
     this.toggleMark = !this.toggleMark;
@@ -35,43 +48,14 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   roomDetails: RoomDetails[] = [];
   ngOnInit(): void {
-    console.log(this.headerComponent);
-    this.roomDetails = [
-      {
-        roomNumber: 100,
-        roomType: "Single Room",
-        amenities: "WiFi, Air Conditioning, TV, Mini Fridge",
-        price: 100,
-        photo: "https://picsum.photos/seed/picsum/200/300", // replace with actual image path
-        rating: 4.723452345,
-        checkInTime: new Date('2023-07-01T14:00:00'),
-        checkOutTime: new Date('2023-07-05T12:00:00')
-      },
-      {
-        roomNumber: 101,
-        roomType: "Double Room",
-        amenities: "WiFi, Air Conditioning, TV, Mini Fridge, Balcony",
-        price: 150,
-        photo: "https://picsum.photos/seed/picsum/200/300", // replace with actual image path
-        rating: 3.232542345,
-        checkInTime: new Date('2023-07-02T14:00:00'),
-        checkOutTime: new Date('2023-07-06T12:00:00')
-      },
-      {
-        roomNumber: 102,
-        roomType: "Suite",
-        amenities: "WiFi, Air Conditioning, TV, Mini Fridge, Balcony, Bathtub, Kitchenette",
-        price: 250,
-        photo: "https://picsum.photos/seed/picsum/200/300", // replace with actual image path
-        rating: 2.634252354,
-        checkInTime: new Date('2023-07-03T14:00:00'),
-        checkOutTime: new Date('2023-07-07T12:00:00')
-      }
-    ];
+    console.log(this.headerComponent); // this will be undefined under current settings.
+    this.roomDetails = this.roomsService.getRoomDetails();
   }
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
+    this.headerComponent.headerText = "Edited text from the header";
+    this.headerComponents.last.headerText = "This is the last header";
   }
 
 

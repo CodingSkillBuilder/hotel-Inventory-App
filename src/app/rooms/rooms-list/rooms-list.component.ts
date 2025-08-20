@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnDestroy,
   OnInit,
   Output,
   SimpleChanges
@@ -16,7 +16,7 @@ import {RoomDetails} from "../rooms";
   styleUrls: ['./rooms-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RoomsListComponent implements OnInit, OnChanges {
+export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() roomDetails: RoomDetails[] = [];
 
@@ -41,7 +41,8 @@ export class RoomsListComponent implements OnInit, OnChanges {
     this.roomSelected.emit(room);
   }
 
-
-
+  ngOnDestroy(): void {
+    console.log("rooms list destroyed");
+  }
 
 }
