@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild, ViewContainerRef} from '@angular/core';
 import {RoomsComponent} from "./rooms/rooms.component";
+import {LoggerService} from "./rooms/services/logger.service";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,13 @@ export class AppComponent implements
   // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef;
   @ViewChild('name') name!: ElementRef;
 
+  constructor(
+    @Optional() private loggerService: LoggerService
+  ){}
+
   ngOnInit(): void {
     // const componentRef = this.vcr.createComponent(RoomsComponent);
+    this.loggerService?.instantLong("This is the damn message");
   }
 
   ngAfterViewInit(): void {

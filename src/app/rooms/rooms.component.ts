@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  Component,
+  Component, Host,
   OnInit,
-  QueryList,
+  QueryList, SkipSelf,
   ViewChild,
   ViewChildren
 } from '@angular/core';
@@ -15,7 +15,8 @@ import {RoomsService} from "./services/rooms.service";
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
-
+  //Mind that we are adding the providers to demonstrate the @SkipSelf() & @Host() but we don't need it cause the service is provided in root.
+  providers: [RoomsService]
 })
 export class RoomsComponent implements OnInit, AfterViewInit {
 
@@ -32,7 +33,10 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private roomsService: RoomsService
+    //we can still use the `private roomsService: RoomsService` without @SelfSkip() and without the providers array and this is for demo
+    // private roomsService: RoomsService
+    // @SkipSelf() private roomsService: RoomsService
+    @Host() private roomsService: RoomsService,
   ) { }
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
