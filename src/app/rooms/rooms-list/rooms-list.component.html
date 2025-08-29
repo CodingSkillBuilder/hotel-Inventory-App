@@ -24,10 +24,10 @@
     <td>{{room.roomType | uppercase}}</td>
     <td>{{room.price | currency: 'SLR' }}</td>
     <td>{{room.amenities | lowercase}}</td>
-    <td>{{room.photo}}</td>
+    <td>{{room.photos}}</td>
     <td>{{room.rating | number: '1.1-1'}}</td>
-    <td>{{room.checkInTime | date: 'short'}}</td>
-    <td>{{room.checkOutTime}}</td>
+    <td>{{room.checkinTime | date: 'short'}}</td>
+    <td>{{room.checkoutTime}}</td>
     <td>
       <button [class]="'btn btn-primary'" (click)="selectRoom(room)">
         select

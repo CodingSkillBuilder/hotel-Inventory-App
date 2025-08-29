@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import {APP_CONFIG_SERVICE, APP_CONFIGURATION} from "./AppConfig/appConfig.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {APP_CONFIG_SERVICE, APP_CONFIGURATION} from "./AppConfig/appConfig.servi
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     {

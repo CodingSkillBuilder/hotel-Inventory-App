@@ -5,12 +5,12 @@ export interface Room {
 }
 
 export interface RoomDetails {
-  roomNumber: number;
+  roomNumber: string;
   roomType: string;
   amenities: string;
   price: number;
-  photo: string;
+  photos: string;
   rating: number;
-  checkInTime: Date;
-  checkOutTime: Date;
+  checkinTime: Date;
+  checkoutTime: Date;
 }

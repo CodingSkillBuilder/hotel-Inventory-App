@@ -10,6 +10,7 @@ import {
 import {Room, RoomDetails} from "./rooms";
 import {HeaderComponent} from "../header/header.component";
 import {RoomsService} from "./services/rooms.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-rooms',
@@ -31,6 +32,13 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   }
   title:string = "This is the title";
 
+  stream = new Observable(observable => {
+    observable.next('This is the first test value');
+    observable.next('This is the second test value');
+    observable.next('This is the third test value');
+    observable.complete();
+    observable.error('oops...an error !!!');
+  });
 
   constructor(
     //we can still use the `private roomsService: RoomsService` without @SelfSkip() and without the providers array and this is for demo
@@ -38,6 +46,21 @@ export class RoomsComponent implements OnInit, AfterViewInit {
     // @SkipSelf() private roomsService: RoomsService
     @Host() private roomsService: RoomsService,
   ) { }
+
+  roomDetails: RoomDetails[] = [];
+  ngOnInit(): void {
+    console.log(this.headerComponent); // this will be undefined under current settings.
+    this.roomsService.getRoomDetails().subscribe(retrievedRoomDetails => this.roomDetails = retrievedRoomDetails);
+
+    // This is just to understand a little about the Observable Data type
+    this.stream.subscribe({
+      next: data => console.log(data),
+      complete: () => console.log("The streaming ended after completion"),
+      error: error => console.log(error),
+    });
+    // A shorthand if you want just the data
+    this.stream.subscribe(shortHandForJustData => console.log(shortHandForJustData));
+  }
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   // @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
@@ -50,11 +73,6 @@ export class RoomsComponent implements OnInit, AfterViewInit {
     this.title = "The toggle button was hit";
   }
 
-  roomDetails: RoomDetails[] = [];
-  ngOnInit(): void {
-    console.log(this.headerComponent); // this will be undefined under current settings.
-    this.roomDetails = this.roomsService.getRoomDetails();
-  }
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
@@ -72,14 +90,14 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   addRoom(){
     const room: RoomDetails = {
-      roomNumber: 101,
+      roomNumber: "101",
       roomType: 'Deluxe Suite',
       amenities: 'WiFi, Air Conditioning, Mini Bar, Ocean View, Flat Screen TV',
       price: 18500,
-      photo: 'https://picsum.photos/id/1018/600/400', // Random image
+      photos: 'https://picsum.photos/id/1018/600/400', // Random image
       rating: 4.6,
-      checkInTime: new Date('2025-05-20T14:00:00'),
-      checkOutTime: new Date('2025-05-23T11:00:00'),
+      checkinTime: new Date('2025-05-20T14:00:00'),
+      checkoutTime: new Date('2025-05-23T11:00:00'),
     };
 
     // this.roomDetails.push(room);

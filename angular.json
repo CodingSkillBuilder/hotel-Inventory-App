@@ -78,7 +78,8 @@
               "browserTarget": "hotelInventoryApp:build:production"
             },
             "development": {
-              "browserTarget": "hotelInventoryApp:build:development"
+              "browserTarget": "hotelInventoryApp:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
