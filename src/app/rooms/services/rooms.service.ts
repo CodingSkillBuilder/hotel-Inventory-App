@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {RoomDetails} from "../rooms";
+import {Room, RoomDetails} from "../rooms";
 import {APP_CONFIG_SERVICE} from "../../AppConfig/appConfig.service";
 import {AppConfig} from "../../AppConfig/appConfig.interface";
 import {HttpClient} from "@angular/common/http";
@@ -60,4 +60,13 @@ export class RoomsService {
     // The diamond operator represents the data receiving format but not the sending format
     return this.httpClient.post<RoomDetails[]>('/api/rooms', room);
   }
-}
+
+  updateRooms(room: RoomDetails) {
+    return this.httpClient.put<RoomDetails[]>(`/api/rooms/${room.roomNumber}`, room);
+  }
+
+  deleteRoom(roomId: string){
+    return this.httpClient.delete<RoomDetails[]>(`/api/rooms/${roomId}`);
+  }
+
+  }

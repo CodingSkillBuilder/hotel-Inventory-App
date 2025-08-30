@@ -21,7 +21,15 @@
 <div *ngIf="rooms.availableRooms > 0 && toggleMark">
 
 <button (click)="addRoom()">Add Room</button>
-<app-rooms-list [roomDetails]="roomDetails" (roomSelected)="selectRoom($event)" [title]="title" [thisType]="'This is a test'"> </app-rooms-list>
+
+<app-rooms-list
+  [roomDetails]="roomDetails"
+  (roomSelected)="selectRoom($event)"
+  (emmitSelectedRoomId)="updateRoom($event)"
+  (emmitSelectedRoomIdForDeletion)="deleteRoom($event)"
+  [title]="title"
+  [thisType]="'This is a test'"
+> </app-rooms-list>
 <div
   *ngIf="selectedRoom"
   [innerText]="selectedRoom | json"

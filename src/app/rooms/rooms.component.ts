@@ -113,6 +113,25 @@ export class RoomsComponent implements OnInit, AfterViewInit {
       .subscribe(updatedRoomDetails => this.roomDetails = updatedRoomDetails);
   }
 
+  updateRoom(roomId: string){
+    const room: RoomDetails = {
+      roomNumber: roomId,
+      roomType: '(Updated)',
+      amenities: '(Updated)',
+      price: 18500,
+      photos: 'https://picsum.photos/id/1018/600/400', // Random image
+      rating: 4.6,
+      checkinTime: new Date('2025-05-20T14:00:00'),
+      checkoutTime: new Date('2025-05-23T11:00:00'),
+    };
 
+    this.roomsService.updateRooms(room)
+      .subscribe(updatedRoomDetails => this.roomDetails = updatedRoomDetails);
+  }
+
+  deleteRoom(roomId: string){
+    this.roomsService.deleteRoom(roomId)
+      .subscribe(updatedRoomDetails => this.roomDetails = updatedRoomDetails);
+  }
 
 }

@@ -26,6 +26,11 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() thisType: string = "This is a cool room";
 
   @Output() roomSelected = new EventEmitter<RoomDetails>();
+
+  @Output() emmitSelectedRoomId = new EventEmitter<string>();
+
+  @Output() emmitSelectedRoomIdForDeletion = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +44,14 @@ export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
   }
   selectRoom(room: RoomDetails){
     this.roomSelected.emit(room);
+  }
+
+  updateRoom(roomId: string){
+    this.emmitSelectedRoomId.emit(roomId);
+  }
+
+  deleteRoom(roomId: string){
+    this.emmitSelectedRoomIdForDeletion.emit(roomId)
   }
 
   ngOnDestroy(): void {
