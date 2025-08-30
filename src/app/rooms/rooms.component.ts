@@ -32,12 +32,18 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   }
   title:string = "This is the title";
 
-  stream = new Observable(observable => {
-    observable.next('This is the first test value');
-    observable.next('This is the second test value');
-    observable.next('This is the third test value');
-    observable.complete();
-    observable.error('oops...an error !!!');
+  // COLD OBSERVABLE: starts only when someone subscribes (like ordering pizza)
+  // Each subscriber gets their own independent run from the beginning
+  stream = new Observable(subscribe => {
+    // These are METHOD CALLS, not assignments - each next() emits one value
+    subscribe.next('This is the first test value');
+    subscribe.next('This is the second test value');
+    subscribe.next('This is the third test value');
+    // TERMINAL SIGNALS: only one of these matters, rest are ignored
+    subscribe.complete(); // stream ends successfully
+    subscribe.error('oops...an error !!!'); // ignored (already completed) (so mind this won't be triggered if error happens in the code...)
+                                                    // but rather a situation like "if this line is reached it is an error"
+                                                        // so better place it inside a if or something... (refer notion for more clarification)
   });
 
   constructor(
@@ -101,7 +107,10 @@ export class RoomsComponent implements OnInit, AfterViewInit {
     };
 
     // this.roomDetails.push(room);
-    this.roomDetails = [...this.roomDetails, room];
+    // this.roomDetails = [...this.roomDetails, room];
+
+    this.roomsService.addRooms(room)
+      .subscribe(updatedRoomDetails => this.roomDetails = updatedRoomDetails);
   }
 
 

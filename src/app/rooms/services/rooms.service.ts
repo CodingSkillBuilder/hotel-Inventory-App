@@ -54,4 +54,10 @@ export class RoomsService {
     // return this.roomDetails;
     return this.httpClient.get<RoomDetails[]>('/api/rooms');
   }
+
+  addRooms(room: RoomDetails) {
+
+    // The diamond operator represents the data receiving format but not the sending format
+    return this.httpClient.post<RoomDetails[]>('/api/rooms', room);
+  }
 }
