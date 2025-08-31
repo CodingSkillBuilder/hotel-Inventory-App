@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Room, RoomDetails} from "../rooms";
 import {APP_CONFIG_SERVICE} from "../../AppConfig/appConfig.service";
 import {AppConfig} from "../../AppConfig/appConfig.interface";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -68,5 +68,20 @@ export class RoomsService {
   deleteRoom(roomId: string){
     return this.httpClient.delete<RoomDetails[]>(`/api/rooms/${roomId}`);
   }
+
+  //Mind that this has nothing to do with the hotel inventory purposes but was placed to
+  //Demo the use case Browser level HTTP calls
+  getPhotos(){
+    const request = new HttpRequest(
+      'GET',
+      `https://jsonplaceholder.typicode.com/photos`,
+      {
+        reportProgress: true
+      }
+    );
+
+    return this.httpClient.request(request)
+  }
+
 
   }

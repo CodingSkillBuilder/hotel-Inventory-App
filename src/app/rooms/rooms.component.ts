@@ -1,16 +1,9 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component, Host,
-  OnInit,
-  QueryList, SkipSelf,
-  ViewChild,
-  ViewChildren
-} from '@angular/core';
+import {AfterViewInit, Component, Host, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Room, RoomDetails} from "./rooms";
 import {HeaderComponent} from "../header/header.component";
 import {RoomsService} from "./services/rooms.service";
 import {Observable} from "rxjs";
+import {HttpEventType} from "@angular/common/http";
 
 @Component({
   selector: 'app-rooms',
@@ -66,6 +59,31 @@ export class RoomsComponent implements OnInit, AfterViewInit {
     });
     // A shorthand if you want just the data
     this.stream.subscribe(shortHandForJustData => console.log(shortHandForJustData));
+
+    //Mind that this has nothing to do with the hotel inventory purposes but was placed to
+    //Demo the use case Browser level HTTP calls
+    this.roomsService.getPhotos().subscribe(event =>{
+      switch (event.type) {
+        case HttpEventType.Sent: {
+          console.log("Received sent");
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log("Received responseHeader");
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          console.log("Here is the download progress of the response");
+          break;
+        }
+        case HttpEventType.Response: {
+          console.log("Received response (The whole damn thing that you can access default HttpClient requests)");
+          console.log(event.body);
+          break;
+        }
+
+      }
+    });
   }
 
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
