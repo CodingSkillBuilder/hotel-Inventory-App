@@ -1,13 +1,13 @@
 <app-header></app-header>
-<app-header></app-header>
-<app-header></app-header>
+<!--<app-header></app-header>-->
+<!--<app-header></app-header>-->
 
 <p>Hello from {{hotelName}}</p>
 <div [hidden]="toggleMark">
   <p>Number of rooms: </p>
   <div
     [ngStyle]="{'color': rooms.availableRooms > 0 ? 'green': 'red'}"
-    [innerText]="roomCount"
+    [innerText]="roomCount$ | async"
   ></div>
 </div>
 
@@ -22,8 +22,9 @@
 
 <button (click)="addRoom()">Add Room</button>
 
+<!--Mind that the roomDetails property of <app-rooms-list> was set to `roomDetails` before-->
 <app-rooms-list
-  [roomDetails]="roomDetails"
+  [roomDetails]="roomDetails$ | async"
   (roomSelected)="selectRoom($event)"
   (emmitSelectedRoomId)="updateRoom($event)"
   (emmitSelectedRoomIdForDeletion)="deleteRoom($event)"
@@ -35,6 +36,8 @@
   [innerText]="selectedRoom | json"
 ></div>
 </div>
+<h3>The total bytes that were loaded from the API: {{totalBytes}}</h3>
+<h3>{{error$ | async}}</h3>
 <!--{{roomDetails | json}}-->
 <!--Commented cause it makes all the thing look ugly but mind that it works as expected-->
 

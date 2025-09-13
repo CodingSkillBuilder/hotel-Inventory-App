@@ -18,7 +18,7 @@ import {RoomDetails} from "../rooms";
 })
 export class RoomsListComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() roomDetails: RoomDetails[] = [];
+  @Input() roomDetails: RoomDetails[] | null = [];
 
   @Input() title!: string;
   // @Input() title: string = "";

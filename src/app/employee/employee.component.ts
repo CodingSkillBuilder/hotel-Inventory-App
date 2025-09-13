@@ -6,7 +6,8 @@ import {RoomsService} from "../rooms/services/rooms.service";
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
   providers: [
-    RoomsService
+    //Uncomment the line below if you want to use the service with the @Self() decorator
+    // RoomsService
   ]
 })
 export class EmployeeComponent implements OnInit {
@@ -15,7 +16,7 @@ export class EmployeeComponent implements OnInit {
 
   //Mind that we are not currently using the roomsService here, and it is added for demonstration purposes.
   constructor(
-    @Self() private roomsService: RoomsService
+    // @Self() private roomsService: RoomsService
   ) { }
 
   ngOnInit(): void {

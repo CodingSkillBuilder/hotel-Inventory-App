@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Host, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, Host, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Room, RoomDetails} from "./rooms";
 import {HeaderComponent} from "../header/header.component";
 import {RoomsService} from "./services/rooms.service";
-import {Observable} from "rxjs";
+import {catchError, map, Observable, of, Subject, Subscription} from "rxjs";
 import {HttpEventType} from "@angular/common/http";
 
 @Component({
@@ -10,13 +10,15 @@ import {HttpEventType} from "@angular/common/http";
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
   //Mind that we are adding the providers to demonstrate the @SkipSelf() & @Host() but we don't need it cause the service is provided in root.
-  providers: [RoomsService]
+  providers: [
+    // RoomsService
+  ]
 })
-export class RoomsComponent implements OnInit, AfterViewInit {
+export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   hotelName: string = "jet-wing";
-  roomCount: number = 5;
+  // roomCount: number = 5;
   toggleMark: boolean = false;
   rooms: Room = {
     totalRooms: 20,
@@ -39,20 +41,48 @@ export class RoomsComponent implements OnInit, AfterViewInit {
                                                         // so better place it inside a if or something... (refer notion for more clarification)
   });
 
+  subscription!: Subscription;
+
   constructor(
     //we can still use the `private roomsService: RoomsService` without @SelfSkip() and without the providers array and this is for demo
-    // private roomsService: RoomsService
+    private roomsService: RoomsService
     // @SkipSelf() private roomsService: RoomsService
-    @Host() private roomsService: RoomsService,
+    // @Host() private roomsService: RoomsService,
   ) { }
 
+  ngOnDestroy(): void {
+    if (this.subscription) this.subscription.unsubscribe();
+  }
+
+
+
+  //Since Observable are lazy and since they are loaded through the components or some code later,
+    //Let's just feel free to get it off the ngOnInit() method
+
+  // roomDetails$ = this.roomsService.getRoomDetails$;
+
+  //Mind that we will be updating the line above as  this because we want use the pipe in order to
+      //to catch the error that might happen when doing streaming.
+  roomDetails$ = this.roomsService.getRoomDetails$;
+  //This version of the roomCount was just updated later
+  roomCount$ = this.roomDetails$.pipe(
+    // map(presentRoomDetails => {
+    //   // return "cat"   <- Mind that when it comes to the map function even this will work
+    //   return presentRoomDetails.length;
+    // })
+    map(presentRoomDetails => presentRoomDetails.length) //But this is the cleanest way to do it
+  );
+  error$ = this.roomsService.error$;
+
   roomDetails: RoomDetails[] = [];
+  totalBytes: number = 0;
   ngOnInit(): void {
     console.log(this.headerComponent); // this will be undefined under current settings.
-    this.roomsService.getRoomDetails().subscribe(retrievedRoomDetails => this.roomDetails = retrievedRoomDetails);
+    // this.roomsService.getRoomDetails().subscribe(retrievedRoomDetails => this.roomDetails = retrievedRoomDetails);
+    // this.roomsService.getRoomDetails$.subscribe(retrievedRoomDetails => this.roomDetails = retrievedRoomDetails);
 
     // This is just to understand a little about the Observable Data type
-    this.stream.subscribe({
+    this.subscription = this.stream.subscribe({
       next: data => console.log(data),
       complete: () => console.log("The streaming ended after completion"),
       error: error => console.log(error),
@@ -74,6 +104,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
         }
         case HttpEventType.DownloadProgress: {
           console.log("Here is the download progress of the response");
+          this.totalBytes += event.loaded;
           break;
         }
         case HttpEventType.Response: {

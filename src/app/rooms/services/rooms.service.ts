@@ -3,7 +3,7 @@ import {Room, RoomDetails} from "../rooms";
 import {APP_CONFIG_SERVICE} from "../../AppConfig/appConfig.service";
 import {AppConfig} from "../../AppConfig/appConfig.interface";
 import {HttpClient, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {catchError, Observable, of, shareReplay, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -43,16 +43,29 @@ export class RoomsService {
     }
   ];
 
+  errorSubject$: Subject<string> = new Subject<string>();
+  error$ = this.errorSubject$.asObservable();
+
+  getRoomDetails$ = this.httpClient.get<RoomDetails[]>('/api/rooms').pipe(
+    catchError((error) => {
+      console.log(error)
+      this.errorSubject$.next(error.message);
+      return of([]);
+    }),
+    shareReplay(1) //No idea what the heck this is I think it's kinda like caching or something...
+  );
+
+
+  getRoomDetails(): Observable<RoomDetails[]>{
+    // return this.roomDetails;
+    return this.httpClient.get<RoomDetails[]>('/api/rooms');
+  }
+
   constructor(
     @Inject(APP_CONFIG_SERVICE) private configuration: AppConfig,
     private httpClient: HttpClient
   ) {
     console.log(configuration.apiUrl);
-  }
-
-  getRoomDetails(): Observable<RoomDetails[]>{
-    // return this.roomDetails;
-    return this.httpClient.get<RoomDetails[]>('/api/rooms');
   }
 
   addRooms(room: RoomDetails) {
