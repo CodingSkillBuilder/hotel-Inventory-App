@@ -11,6 +11,7 @@ import {
 import {RoomsComponent} from "./rooms/rooms.component";
 import {LoggerService} from "./rooms/services/logger.service";
 import {localStorageToken} from "./localstorage.token";
+import {InitialisingEngineService} from "./initialising-engine.service";
 
 @Component({
   selector: 'app-root',
@@ -30,8 +31,14 @@ export class AppComponent implements
 
   constructor(
     @Optional() private loggerService: LoggerService,
-    @Inject(localStorageToken) private localStorage: Storage
-  ){}
+    @Inject(localStorageToken) private localStorage: Storage,
+    private initializer: InitialisingEngineService
+  ){
+    //This is solely for testing purposes, if a value is available at this level since app component generally is the
+    //base most component in a system, if a value is available at it's constructor this means
+    //it is accessible any time anywhere...
+    console.log(initializer.engineConfig);
+  }
 
   ngOnInit(): void {
     // const componentRef = this.vcr.createComponent(RoomsComponent);

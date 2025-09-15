@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,15 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import {APP_CONFIG_SERVICE, APP_CONFIGURATION} from "./AppConfig/appConfig.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {RequestInterceptor} from "./request.interceptor";
+import {InitialisingEngineService} from "./initialising-engine.service";
+
+
+function startInitializerEngine(initializer: InitialisingEngineService){
+  return () => initializer.startEngine();
+}
+
 
 @NgModule({
   declarations: [
@@ -31,6 +39,17 @@ import {HttpClientModule} from "@angular/common/http";
     {
       provide: APP_CONFIG_SERVICE,
       useValue: APP_CONFIGURATION
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: startInitializerEngine,
+      deps: [InitialisingEngineService],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

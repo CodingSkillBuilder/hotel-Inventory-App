@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Room, RoomDetails} from "../rooms";
 import {APP_CONFIG_SERVICE} from "../../AppConfig/appConfig.service";
 import {AppConfig} from "../../AppConfig/appConfig.interface";
-import {HttpClient, HttpRequest} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {catchError, Observable, of, shareReplay, Subject} from "rxjs";
 
 @Injectable({
@@ -43,10 +43,17 @@ export class RoomsService {
     }
   ];
 
+  // httpHeaderOptions: HttpHeaders = new HttpHeaders({
+  //   'token': "This is a super secure HTTP token lol :)"
+  // });
+
   errorSubject$: Subject<string> = new Subject<string>();
   error$ = this.errorSubject$.asObservable();
 
-  getRoomDetails$ = this.httpClient.get<RoomDetails[]>('/api/rooms').pipe(
+  getRoomDetails$ = this.httpClient.get<RoomDetails[]>(
+    '/api/rooms'
+    // , {headers: this.httpHeaderOptions}   //Mind that this is commented cause we will be adding the headers using interceptors which is the recommended approach...
+  ).pipe( // Adding the HTTP header options as the second parameter...
     catchError((error) => {
       console.log(error)
       this.errorSubject$.next(error.message);
