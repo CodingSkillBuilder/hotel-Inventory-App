@@ -1,29 +1,31 @@
 <!--<script src="app.component.ts"></script>-->
-
-
 <h1>Hello from Angular !!! :)</h1>
 
-<div [ngSwitch]="role">
-  <div *ngSwitchCase="'user'">Welcome to the user's page</div>
-  <div *ngSwitchCase="'admin'">
-<!--    <app-rooms></app-rooms>-->
-    <app-container>
-      <h3>This is from the app container</h3>
-      <app-rooms></app-rooms>
-<!--      <app-employee></app-employee>-->
-    </app-container>
-  </div>
-  <div *ngSwitchDefault>
-    You are Not Authorized to view this page
-  </div>
+<!--<div [ngSwitch]="role">-->
+<!--  <div *ngSwitchCase="'user'">Welcome to the user's page</div>-->
+<!--  <div *ngSwitchCase="'admin'">-->
+<!--&lt;!&ndash;    <app-rooms></app-rooms>&ndash;&gt;-->
+<!--    <app-container>-->
+<!--      <h3>This is from the app container</h3>-->
+<!--      <app-rooms></app-rooms>-->
+<!--&lt;!&ndash;      <app-employee></app-employee>&ndash;&gt;-->
+<!--    </app-container>-->
+<!--  </div>-->
+<!--  <div *ngSwitchDefault>-->
+<!--    You are Not Authorized to view this page-->
+<!--  </div>-->
 
-</div>
+<!--</div>-->
 
 <!--<div>-->
 <!--  <ng-template #user></ng-template>-->
 <!--</div>-->
 
 <div #name>I love cats by the way</div>
+
+<a [routerLink]="'rooms'">Rooms</a><br>
+<a [routerLink]="'employee'">Employee</a>
+<router-outlet></router-outlet>
 
 
 
