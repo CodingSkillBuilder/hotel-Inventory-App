@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -35,7 +36,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
-    AppNavComponent
+    AppNavComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
