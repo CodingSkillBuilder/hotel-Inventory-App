@@ -29,11 +29,13 @@
     <td>{{room.checkinTime | date: 'short'}}</td>
     <td>{{room.checkoutTime}}</td>
     <td>
-      <button [class]="'btn btn-primary'" (click)="selectRoom(room)">
-        select
-      </button>
-      <button [class]="'btn btn-primary'" (click)="updateRoom(room.roomNumber)">Update</button>
-      <button [class]="'btn btn-primary'" (click)="deleteRoom(room.roomNumber)">Delete</button>
+<!--      we will be commenting the selectRoom, updateRoom and deleteRoom buttons to move forward in the course-->
+<!--      <button [class]="'btn btn-primary'" (click)="selectRoom(room)">-->
+<!--        select-->
+<!--      </button>-->
+<!--      <button [class]="'btn btn-primary'" (click)="updateRoom(room.roomNumber)">Update</button>-->
+<!--      <button [class]="'btn btn-primary'" (click)="deleteRoom(room.roomNumber)">Delete</button>-->
+      <button [class]="'btn btn-primary'" [routerLink]="['/rooms', room.roomNumber]" >Book me :)</button>
     </td>
 
   </tr>

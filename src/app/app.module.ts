@@ -21,6 +21,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -37,7 +38,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     ContainerComponent,
     EmployeeComponent,
     AppNavComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RoomBookingComponent
   ],
   imports: [
     BrowserModule,
