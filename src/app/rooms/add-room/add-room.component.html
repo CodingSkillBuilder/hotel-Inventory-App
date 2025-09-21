@@ -1,0 +1,87 @@
+
+<form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
+  <div class="form-group">
+    <input
+      required type="text"
+      name="roomType"
+      class="form-control"
+      placeholder="Room type"
+      [(ngModel)]="rooms.roomNumber"
+    >
+  </div>
+  <div class="form-group">
+    <input
+      #roomsAmenities="ngModel"
+      minlength="5"
+      required
+      type="text"
+      name="amenities"
+      class="form-control"
+      placeholder="Amenities"
+      [(ngModel)]="rooms.amenities"
+    >
+  <p class="text-danger" *ngIf="roomsAmenities.errors?.['minlength']">A minimum of 5 characters are required</p>
+  </div>
+  <div class="form-group">
+    <input
+      required
+      type="number"
+      name="price"
+      class="form-control"
+      placeholder="Price"
+      [(ngModel)]="rooms.price"
+    >
+  </div>
+  <div class="form-group">
+    <input
+      required
+      type="text"
+      name="photos"
+      class="form-control"
+      placeholder="Photos"
+      [(ngModel)]="rooms.photos"
+    >
+  </div>
+  <div class="form-group">
+    <input
+      type="date"
+      name="checkinTime"
+      class="form-control"
+      placeholder="Check in time"
+      [(ngModel)]="rooms.checkinTime"
+    >
+  </div>
+  <div class="form-group">
+    <input
+      type="date"
+      name="checkoutTime"
+      class="form-control"
+      placeholder="Check out time"
+      [(ngModel)]="rooms.checkoutTime"
+    >
+  </div>
+  <div class="form-group">
+    <input
+      min="1"
+      max="5"
+      type="number"
+      name="rating"
+      class="form-control"
+      placeholder="Rating"
+      [(ngModel)]="rooms.rating"
+    >
+  </div>
+  <div>
+    <button [disabled]="roomsForm.invalid" class="btn btn-primary" type="submit">Submit Me :)</button>
+  </div>
+</form>
+
+<!--<p>{{rooms | json}}</p> &lt;!&ndash;commenting this cause we are about to learn a better way to make this happen&ndash;&gt;-->
+
+<p>{{roomsForm.pristine | json}}</p>
+<p>{{roomsForm.dirty | json}}</p>
+<p>{{roomsForm.valid | json}}</p>
+<p>{{roomsForm.invalid | json}}</p>
+<p>{{roomsForm.value | json}}</p>
+
+<div *ngIf="showMessage" class="alert alert-success">{{messageAfterAdding}}</div>

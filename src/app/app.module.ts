@@ -22,6 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RoomBookingComponent } from './rooms/room-booking/room-booking.component';
+import { AddRoomComponent } from './rooms/add-room/add-room.component';
+import {FormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -39,7 +42,9 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     EmployeeComponent,
     AppNavComponent,
     NotFoundComponent,
-    RoomBookingComponent
+    RoomBookingComponent,
+    AddRoomComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FormsModule
   ],
   providers: [
     {
