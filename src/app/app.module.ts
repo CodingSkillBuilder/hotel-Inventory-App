@@ -25,6 +25,7 @@ import { RoomBookingComponent } from './rooms/room-booking/room-booking.componen
 import { AddRoomComponent } from './rooms/add-room/add-room.component';
 import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
+import { HoverDirective } from './hover.directive';
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -44,7 +45,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     NotFoundComponent,
     RoomBookingComponent,
     AddRoomComponent,
-    LoginComponent
+    LoginComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,
