@@ -27,7 +27,7 @@ export class AppComponent implements
 
   // @ViewChild('user', {read: ViewContainerRef, static: true}) vcr!: ViewContainerRef;
   // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef;
-  @ViewChild('name') name!: ElementRef;
+  // @ViewChild('name') name!: ElementRef;
 
   constructor(
     @Optional() private loggerService: LoggerService,
@@ -49,7 +49,7 @@ export class AppComponent implements
   ngAfterViewInit(): void {
     // const componentRef = this.vcr.createComponent(RoomsComponent);
     // componentRef.instance.roomCount = 50;
-    console.log(this.name.nativeElement.innerText);
+    // console.log(this.name.nativeElement.innerText);
   }
 
 
