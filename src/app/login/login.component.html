@@ -1,6 +1,9 @@
 <form (ngSubmit)="login()">
   <div class="form-group">
-    <input appHover type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="username or email">
+    <input #emailController="ngModel" appEmailValidator appHover type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="username or email">
+    <div class="text-danger" *ngIf="emailController.errors?.['invalidCruiserMail']">
+      <p>Please enter a proper email</p>
+    </div>
   </div>
   <div class="form-group">
     <input appHover color="white" type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="password">

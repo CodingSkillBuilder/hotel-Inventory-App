@@ -26,6 +26,7 @@ import { AddRoomComponent } from './rooms/add-room/add-room.component';
 import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
+import { EmailValidatorDirective } from './email-validator.directive';
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -46,7 +47,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     RoomBookingComponent,
     AddRoomComponent,
     LoginComponent,
-    HoverDirective
+    HoverDirective,
+    EmailValidatorDirective
   ],
   imports: [
     BrowserModule,
