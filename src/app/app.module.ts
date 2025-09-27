@@ -27,6 +27,7 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './email-validator.directive';
+import {RoomsModule} from "./rooms/rooms.module";
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -37,21 +38,17 @@ function startInitializerEngine(initializer: InitialisingEngineService){
 @NgModule({
   declarations: [
     AppComponent,
-    RoomsComponent,
-    RoomsListComponent,
-    HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
     AppNavComponent,
     NotFoundComponent,
-    RoomBookingComponent,
-    AddRoomComponent,
     LoginComponent,
     HoverDirective,
     EmailValidatorDirective
   ],
   imports: [
     BrowserModule,
+    RoomsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -61,7 +58,8 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+
   ],
   providers: [
     {

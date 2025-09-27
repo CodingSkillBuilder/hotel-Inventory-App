@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     if(this.email === "admin" && this.password === "1234"){
       // alert("You got logged in");
       console.log("Logging operation success");
-      this.router.navigate(['/rooms', 'add']);
+      this.router.navigate(['/rooms']);
 
 
     }
