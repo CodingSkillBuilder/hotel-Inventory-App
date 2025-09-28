@@ -48,7 +48,7 @@ function startInitializerEngine(initializer: InitialisingEngineService){
   ],
   imports: [
     BrowserModule,
-    RoomsModule,
+    // RoomsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
