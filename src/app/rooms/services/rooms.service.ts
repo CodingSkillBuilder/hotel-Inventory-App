@@ -4,6 +4,7 @@ import {APP_CONFIG_SERVICE} from "../../AppConfig/appConfig.service";
 import {AppConfig} from "../../AppConfig/appConfig.interface";
 import {HttpClient, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {catchError, Observable, of, shareReplay, Subject} from "rxjs";
+import {ConfigService} from "../../services/config.service";
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +71,8 @@ export class RoomsService {
 
   constructor(
     @Inject(APP_CONFIG_SERVICE) private configuration: AppConfig,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private configService: ConfigService, // Just injected to demonstrate how provided type any works inside a lazy loaded module
   ) {
     console.log(configuration.apiUrl);
   }

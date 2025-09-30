@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './email-validator.directive';
 import {RoomsModule} from "./rooms/rooms.module";
+import {RouteConfigToken} from "./services/routeConfig.service";
 
 
 function startInitializerEngine(initializer: InitialisingEngineService){
@@ -65,6 +66,14 @@ function startInitializerEngine(initializer: InitialisingEngineService){
     {
       provide: APP_CONFIG_SERVICE,
       useValue: APP_CONFIGURATION
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: {
+        title: "This is an example value for demonstrating " +
+          "that it can be set differently when it comes to lazy loading component, " +
+          "this is from app module"
+      }
     },
     {
       provide: HTTP_INTERCEPTORS,

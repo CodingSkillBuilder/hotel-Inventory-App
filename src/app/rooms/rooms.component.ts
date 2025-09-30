@@ -4,6 +4,7 @@ import {HeaderComponent} from "../header/header.component";
 import {RoomsService} from "./services/rooms.service";
 import {catchError, map, Observable, of, Subject, Subscription} from "rxjs";
 import {HttpEventType} from "@angular/common/http";
+import {ConfigService} from "../services/config.service";
 
 @Component({
   selector: 'app-rooms',
@@ -45,9 +46,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     //we can still use the `private roomsService: RoomsService` without @SelfSkip() and without the providers array and this is for demo
-    private roomsService: RoomsService
+    private roomsService: RoomsService,
     // @SkipSelf() private roomsService: RoomsService
     // @Host() private roomsService: RoomsService,
+    private configService: ConfigService // Just injected to demonstrate how provided type any works inside a lazy loaded module
   ) { }
 
   ngOnDestroy(): void {
