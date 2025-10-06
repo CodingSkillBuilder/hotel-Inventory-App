@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {LoginService} from "./login.service";
 
 @Component({
   selector: 'app-login',
@@ -12,14 +13,15 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   constructor(
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    if(this.email === "admin" && this.password === "1234"){
+    if(this.loginService.login(this.email, this.password)){
       // alert("You got logged in");
       console.log("Logging operation success");
       this.router.navigate(['/rooms']);

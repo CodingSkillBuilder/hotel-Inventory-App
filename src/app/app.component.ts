@@ -12,15 +12,16 @@ import {RoomsComponent} from "./rooms/rooms.component";
 import {LoggerService} from "./rooms/services/logger.service";
 import {localStorageToken} from "./localstorage.token";
 import {InitialisingEngineService} from "./initialising-engine.service";
+import {NavigationEnd, NavigationStart, Router} from "@angular/router";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements
-  OnInit,
-  AfterViewInit{
+export class AppComponent implements OnInit,
+  AfterViewInit {
 
   title: string = 'hotelInventoryApp';
   role: string = 'admin';
@@ -32,8 +33,9 @@ export class AppComponent implements
   constructor(
     @Optional() private loggerService: LoggerService,
     @Inject(localStorageToken) private localStorage: Storage,
-    private initializer: InitialisingEngineService
-  ){
+    private initializer: InitialisingEngineService,
+    private router: Router
+  ) {
     //This is solely for testing purposes, if a value is available at this level since app component generally is the
     //base most component in a system, if a value is available at it's constructor this means
     //it is accessible any time anywhere...
@@ -44,6 +46,14 @@ export class AppComponent implements
     // const componentRef = this.vcr.createComponent(RoomsComponent);
     this.loggerService?.instantLong("This is the damn message");
     this.localStorage.setItem("StorageValue", "This is a local storage value");
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)
+    ).subscribe(event => console.log("Navigation started"));
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)
+    ).subscribe(event => console.log("Navigation ended"));
   }
 
   ngAfterViewInit(): void {

@@ -4,17 +4,19 @@ import {LoginComponent} from "../login/login.component";
 import {RoomsComponent} from "./rooms.component";
 import {AddRoomComponent} from "./add-room/add-room.component";
 import {RoomBookingComponent} from "./room-booking/room-booking.component";
+import {RoomGuard} from "./guards/room.guard";
 
 const routes: Routes = [
-  {path: 'add', component: AddRoomComponent},
+
   {
     path: '',
     component: RoomsComponent,
+    canActivateChild: [RoomGuard],
     children: [
+      {path: 'add', component: AddRoomComponent},
       {path: `:id`, component: RoomBookingComponent},
     ]
   }
-
 
 ];
 
