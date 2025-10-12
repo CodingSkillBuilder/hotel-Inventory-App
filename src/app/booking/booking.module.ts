@@ -8,6 +8,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonModule,
   ]
 })
 export class BookingModule { }

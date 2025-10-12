@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -18,7 +18,7 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingForm = this.formBuilder.group({
-      roomId: new FormControl(''),
+      roomId: new FormControl({value: '2', disabled: true}),
       guestEmail: [''],                       // Mind that `['']` is a shortcut for `new FormControl(''),`
       checkinDate: [''],
       checkoutDate: [''],
@@ -36,4 +36,8 @@ export class BookingComponent implements OnInit {
     });
   }
 
+  submitBookingForm(): void {
+    // console.log(this.bookingForm.value);
+    console.log(this.bookingForm.getRawValue());
+  }
 }

@@ -5,7 +5,7 @@
 <pre>{{ bookingForm.value | json }}</pre>
 
 
-<form class="example-form" [formGroup]="bookingForm">
+<form class="example-form" [formGroup]="bookingForm" (ngSubmit)="submitBookingForm()">
   <div>
     <mat-form-field class="example-full-width">
       <mat-label>Room ID</mat-label>
@@ -65,5 +65,9 @@
       <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
       <mat-datepicker #checkOutPicker></mat-datepicker>
     </mat-form-field>
+  </div>
+
+  <div class="example-full-width">
+  <button mat-flat-button color="primary" >Book now</button>
   </div>
 </form>
