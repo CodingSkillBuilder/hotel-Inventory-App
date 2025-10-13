@@ -15,6 +15,7 @@ export class BookingComponent implements OnInit {
 
   // To start working with form (to control it and to catch it we need a formGroup class)
   bookingForm!: FormGroup;
+  panelOpenState: boolean = false;
 
   ngOnInit(): void {
     this.bookingForm = this.formBuilder.group({
@@ -26,13 +27,15 @@ export class BookingComponent implements OnInit {
       bookingAmount: [''],
       bookingDate: [''],
       mobileNumber: [''],
-      guestName: [''],
-      guestAddress: [''],
-      guestCity: [''],
-      guestState: [''],
-      guestCountry: [''],
-      guestZipCode: [''],
-      guestCount: ['']
+      guestInformation: this.formBuilder.group({
+        guestName: [''],
+        guestAddress: [''],
+        guestCity: [''],
+        guestState: [''],
+        guestCountry: [''],
+        guestZipCode: [''],
+        guestCount: ['']
+      }),
     });
   }
 

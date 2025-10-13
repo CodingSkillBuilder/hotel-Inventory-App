@@ -67,7 +67,86 @@
     </mat-form-field>
   </div>
 
+  <div formGroupName="guestInformation">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Guess information
+          </mat-panel-title>
+          <mat-panel-description>
+            show {{ panelOpenState ? 'less' : 'more' }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestName"
+            placeholder="Your name here"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestAddress"
+            placeholder="Your address here"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestCity"
+            placeholder="Your city here"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestState"
+            placeholder="Your state here"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestCountry"
+            placeholder="Your country here"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Zip code</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestZipCode"
+            placeholder="Your zip code"
+          >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Guest count</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="guestCount"
+            placeholder="How many of you will be here"
+          >
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
   <div class="example-full-width">
-  <button mat-flat-button color="primary" >Book now</button>
+    <button mat-flat-button color="primary">Book now</button>
   </div>
 </form>
